@@ -7,15 +7,15 @@ using namespace std;
 class Solution 
 {
     public:
-    void dfs(int i, set<int>&v2, vector<int>&vis, vector<int>adj[])
+    void dfs(int i, map<int, bool> &mp, vector<int> &vis, vector<int>adj[])
     {
         vis[i] = 1;
-        v2.insert(i);
+        mp[i] = 1;
         for(auto it : adj[i])
         {
-            if(v2.find(it) == v2.end())
+            if(mp.find(it) == mp.end())
             {
-                dfs(it, v2, vis, adj);
+                dfs(it, mp, vis, adj);
             }
         }
     }
@@ -24,14 +24,14 @@ class Solution
 	    vector<int> vis(V, 0);
 	    for(int i = 0; i < V; i++)
 	    {
-	        set<int> v2;
+	        map<int, bool> mp;
 	        if(!vis[i])
 	        {
-	            dfs(i, v2, vis, adj);
+	            dfs(i, mp, vis, adj);
 	        }
 	        
-	        // condition for t
-	        if(v2.size() == V)
+	        // condition for the mother vertex
+	        if(mp.size() == V)
 	        {
 	            return i;
 	        }
