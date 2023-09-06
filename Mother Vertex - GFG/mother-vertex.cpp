@@ -30,6 +30,7 @@ class Solution
 	            dfs(i, v2, vis, adj);
 	        }
 	        
+	        // condition for t
 	        if(v2.size() == V)
 	        {
 	            return i;
