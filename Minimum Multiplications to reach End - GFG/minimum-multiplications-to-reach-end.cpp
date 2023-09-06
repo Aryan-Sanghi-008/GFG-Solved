@@ -7,48 +7,38 @@ using namespace std;
 
 // } Driver Code Ends
 // User function Template for C++
-
 class Solution
 {
 public:
-    int mod = 1e5;
+    const int mod = 1e5;
     int minimumMultiplications(vector<int> &arr, int start, int end)
     {
-        vector<int> v(100001, -1);
-        int n = arr.size();
-        int count = 0;
-        if (start == end)
-        {
-            return 0;
-        }
-        
+        vector<int> minn(1e5, 1e9);
         queue<int> q;
         q.push(start);
-        
+        int ops = 0;
         while (!q.empty())
         {
-            count++;
-            int sz = q.size();
-            for (int i = 0; i < sz; i++)
+            int si = q.size();
+            for (int i = 0; i < si; i++)
             {
-                int temp = q.front();
+                int val= q.front();
                 q.pop();
-                for (int j = 0; j < n; j++)
+                if (val == end)
                 {
-                    int ans = ((temp % mod) * (arr[j] % mod)) % mod;
-
-                    if (ans == end)
+                    return ops;
+                }
+                for (int j : arr)
+                {
+                    int newNum = ((val % mod) * (j % mod)) % mod;
+                    if ((1 + ops) < minn[newNum])
                     {
-                        return count;
-                    }
-                    
-                    if (v[ans] == -1)
-                    {
-                        q.push(ans);
-                        v[ans] = count;
+                        q.push(newNum);
+                        minn[newNum] = 1 + ops;
                     }
                 }
             }
+            ops++;
         }
         return -1;
     }
