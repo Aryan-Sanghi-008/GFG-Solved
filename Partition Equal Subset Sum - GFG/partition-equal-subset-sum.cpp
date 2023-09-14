@@ -9,7 +9,7 @@ using namespace std;
 
 class Solution{
 public:
-    int solve(int i, int curr, int n, int arr[], vector<vector<int>> &dp, int sum)
+    int solve(int i, int curr, int arr[], int n, vector<vector<int>> &dp, int sum)
     {
         if(i >= n)
         {
@@ -19,14 +19,15 @@ public:
         {
             return dp[i][curr];
         }
+        
         int pick = 0, not_pick = 0;
-        not_pick = solve(i + 1, curr, n, arr, dp, sum);
+        not_pick = solve(i + 1, curr, arr, n, dp, sum);
+
         if(curr + arr[i] <= sum)
         {
-            pick = solve(i + 1, curr + arr[i], n, arr, dp, sum);
+            pick = solve(i + 1, curr + arr[i], arr, n, dp, sum);
         }
-        
-        return dp[i][curr] = pick || not_pick;
+        return dp[i][curr] = (not_pick || pick);
     }
     int equalPartition(int n, int arr[])
     {
@@ -40,8 +41,8 @@ public:
             return 0;
         }
         sum >>= 1;
-        vector<vector<int>> dp(n + 1, vector<int>(sum + 1, -1));
-        return solve(0, 0, n, arr, dp, sum);
+        vector<vector<int>> dp(n, vector<int>(sum, -1));
+        return solve(0, 0, arr, n, dp, sum);
     }
 };
 
