@@ -40,7 +40,7 @@ public:
             return 0;
         }
         sum >>= 1;
-        vector<vector<int>> dp(n + 1, vector<int>(sum + 1, -1));
+        vector<vector<int>> dp(n, vector<int>(sum, -1));
         return solve(0, 0, n, arr, dp, sum);
     }
 };
