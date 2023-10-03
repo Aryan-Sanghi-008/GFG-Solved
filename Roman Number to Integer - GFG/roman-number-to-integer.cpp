@@ -18,7 +18,7 @@ class Solution {
         {
             if ((i + 1) < n && mp[s[i]] < mp[s[i + 1]])
             {
-                ans += (mp[s[i + 1]] - mp[s[i]]);
+                ans += mp[s[i + 1]] - mp[s[i]];
                 i++;
             }
             else
