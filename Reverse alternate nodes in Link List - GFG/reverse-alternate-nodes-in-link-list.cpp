@@ -75,6 +75,8 @@ void insert()
 */
 class Solution
 {
+
+public:
     struct Node *reverse(struct Node *head)
     {
         if (!head || !head->next)
@@ -93,8 +95,6 @@ class Solution
         }
         return prev;
     }
-
-public:
     void rearrange(struct Node *odd)
     {
         if (!odd || !odd->next)
