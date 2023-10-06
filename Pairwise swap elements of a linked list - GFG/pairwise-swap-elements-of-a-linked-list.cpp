@@ -44,6 +44,7 @@ class Solution
         }
         
         Node *store = head->next;
+
         head->next = pairWiseSwap(head->next->next);
         store->next = head;
         
