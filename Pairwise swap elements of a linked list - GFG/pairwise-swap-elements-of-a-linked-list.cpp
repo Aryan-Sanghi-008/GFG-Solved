@@ -25,7 +25,8 @@ struct Node
     int data;
     struct Node* next;
 
-    Node(int x){
+    Node(int x)
+    {
         data = x;
         next = NULL;
     }
@@ -35,7 +36,7 @@ struct Node
 class Solution
 {
     public:
-    Node* pairWiseSwap(struct Node* head) 
+    Node* pairWiseSwap(struct Node* head)
     {
         if (!head || !head->next)
         {
