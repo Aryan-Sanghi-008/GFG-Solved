@@ -13,35 +13,34 @@ class Solution
   public:
     long long solve(string &s, int k, int n)
     {
+        vector<int> freq(26, 0);
         int i = 0, j = 0;
-        vector<int> mp(26, 0);
-        long long ans = 0;
-        int cnt = 0;
+        long long sum = 0;
+        int dis = 0;
         while(i < n)
         {
-            mp[s[i] - 'a']++;
-            if(mp[s[i] - 'a'] == 1)
+            freq[s[i] - 'a']++;
+            if(freq[s[i] - 'a'] == 1)
             {
-                cnt++;
+                dis++;
             }
-            while(cnt > k)
+            while(dis > k)
             {
-                mp[s[j] - 'a']--;
-                if(!mp[s[j] - 'a'])
+                freq[s[j] - 'a']--;
+                if(freq[s[j] - 'a'] == 0)
                 {
-                    cnt--;
+                    dis--;
                 }
                 j++;
             }
-            ans += (i - j + 1) * 1LL;
+            sum += (i - j + 1) * 1LL;
             i++;
         }
-        return ans;
+        return sum;
     }
-    long long int substrCount (string s, int k) 
-    {
+    long long int substrCount (string s, int k) {
         int n = s.length();
-        long long int ans = solve(s, k, n) - solve(s, k - 1, n);
+        long long ans = solve(s, k, n) - solve(s, k - 1, n);
         return ans;
     }
 };
