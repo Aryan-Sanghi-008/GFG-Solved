@@ -104,8 +104,8 @@ class Solution {
         }
         
         s += to_string(root->data);
-        s = s + solve(root->left, mp);
-        s = s + solve(root->right, mp);
+        s += solve(root->left, mp);
+        s += solve(root->right, mp);
         mp[s]++;
         return s;
     }
