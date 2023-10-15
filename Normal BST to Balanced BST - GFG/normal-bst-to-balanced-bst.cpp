@@ -30,28 +30,34 @@ class Solution{
     public:
     // Your are required to complete this function
     // function should return root of the modified BST
-    void inOrder(Node* root, vector<int> &inOrderValue) {
-        if(root == NULL)
+    void inorder(Node *root, vector<int> &v)
+    {
+        if (root == NULL)
+        {
             return;
-        inOrder(root -> left, inOrderValue);
-        inOrderValue.push_back(root -> data);
-        inOrder(root -> right, inOrderValue);
+        }
+        inorder(root->left, v);
+        v.push_back(root->data);
+        inorder(root->right, v);
     }
-    Node* inOrderToBST(int start, int end, vector<int> &inOrderValue) {
-        if(start > end)
+    Node *make_tree(int lo, int hi, vector<int> &v)
+    {
+        if (lo > hi)
+        {
             return NULL;
-        int mid = start + (end - start) / 2;
-        Node* root = new Node(inOrderValue[mid]);
-        root -> left = inOrderToBST(start, mid - 1, inOrderValue);
-        root -> right = inOrderToBST(mid + 1, end, inOrderValue);
+        }
+    
+        int mid = lo + (hi - lo) / 2;
+        Node *root = new Node(v[mid]);
+        root->left = make_tree(lo, mid - 1, v);
+        root->right = make_tree(mid + 1, hi, v);
         return root;
     }
-    Node* buildBalancedTree(Node* root)
+    Node *buildBalancedTree(Node *root)
     {
-    	// Code here
-    	vector<int> inOrderValue;
-        inOrder(root, inOrderValue);
-        return inOrderToBST(0, inOrderValue.size() - 1, inOrderValue);
+        vector<int> v;
+        inorder(root, v);
+        return make_tree(0, v.size() - 1, v);
     }
 };
 
